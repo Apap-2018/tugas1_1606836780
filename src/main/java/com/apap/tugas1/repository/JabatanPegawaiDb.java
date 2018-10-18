@@ -11,5 +11,7 @@ public interface JabatanPegawaiDb extends JpaRepository<JabatanPegawaiModel, Lon
 	
 	Optional<List<JabatanPegawaiModel>> findAllByPegawai_Nip(String nip);
 	
+	List<JabatanPegawaiModel> findAllByJabatan_Id(Long id);
+	
 
 }

@@ -44,6 +44,11 @@ public class JabatanServiceImpl implements JabatanService{
 	}
 	
 	@Override
+	public List<JabatanModel> getAllJabatan() {
+		// TODO Auto-generated method stub
+		return JabatanDb.findAll();
+	}
+	@Override
 	public void updateJabatan(JabatanModel jabatan, Long jabatanId) {
 		JabatanModel jabatanUpdate = JabatanDb.getOne(jabatanId);
 		jabatanUpdate.setNama(jabatan.getNama());

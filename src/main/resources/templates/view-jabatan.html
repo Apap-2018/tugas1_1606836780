@@ -22,12 +22,23 @@
 				<td>Gaji Pokok</td>
 				<td th:text="${jabatan.gaji_pokok}"></td>
 			</tr>
+			<tr>
+				<td>Jumlah Pegawai</td>
+				<td th:text="${jumlah}"></td>
+			</tr>
 		</table>
 		
 		<form th:action="@{'/jabatan/ubah'}" method="GET">
 			<input type="hidden" th:value="${jabatan.id}" name="jabatanId">
 			<button value="submit">Ubah</button>
 		</form>
+		
+		<hr>
+		<form th:action="@{'/jabatan/hapus'}" th:method="POST" >
+    		<input type="hidden" name="id" th:value="${jabatan.id}" />
+    		<button value="submit" class="btn btn-danger">Hapus</button>
+		</form>
+		<hr>
 		
 		<!-- <form th:action="@{'/jabatan/hapus'}">
 			<button value="submit">Hapus</button>

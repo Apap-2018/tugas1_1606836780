@@ -9,11 +9,11 @@
 		<nav th:replace="fragments/fragment :: navbar"></nav>
 		
 		<div class="container-fluid">
-			<h2>Sistem Informasi Kepegawaian</h2>
-			<h4>Selamat datang di Sistem Informasi Kepegawaian</h4>
+			<h2 style= text-align:center>Sistem Informasi Kepegawaian</h2>
+			<h5 style= text-align:center>Selamat datang di Sistem Informasi Kepegawaian</h5>
 			<br>
 			<hr>
-			<h1>Lihat Data Pegawai berdasarkan NIP</h1>
+			<h2>Lihat Data Pegawai berdasarkan NIP</h2>
 			<h4>Masukkan Nomor Induk Pegawai</h4>
 			<form th:action="@{/pegawai}" method="GET">
 				<input type="text" name="pegawaiNip" class="form-control"/>
