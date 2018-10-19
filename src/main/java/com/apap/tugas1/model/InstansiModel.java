@@ -19,8 +19,6 @@ public class InstansiModel implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Size(max = 20)
-	@NotNull
 	private long id;
 	
 	@NotNull
@@ -34,7 +32,6 @@ public class InstansiModel implements Serializable{
 	private String deskripsi;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@Size(max = 20)
 	@JoinColumn(name = "id_provinsi", referencedColumnName = "id", nullable = false)
 	@OnDelete(action = OnDeleteAction.NO_ACTION)
 	@JsonIgnore

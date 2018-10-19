@@ -19,19 +19,15 @@ public class JabatanPegawaiModel {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Size(max = 20)
-	@NotNull
 	private long id;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@Size(max = 20)
 	@JoinColumn(name = "id_pegawai", referencedColumnName = "id", nullable = false)
 	@OnDelete(action = OnDeleteAction.NO_ACTION)
 	@JsonIgnore
 	private PegawaiModel pegawai;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@Size(max = 20)
 	@JoinColumn(name = "id_jabatan", referencedColumnName = "id", nullable = false)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JsonIgnore

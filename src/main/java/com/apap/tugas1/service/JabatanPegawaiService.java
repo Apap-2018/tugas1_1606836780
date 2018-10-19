@@ -7,4 +7,5 @@ import com.apap.tugas1.model.JabatanPegawaiModel;
 public interface JabatanPegawaiService {
 	Optional<List<JabatanPegawaiModel>> getJabatanByNip(String nip);
 	List<JabatanPegawaiModel> getJabatanPegawaiById(Long id);
+	void addJabatanPegawai(JabatanPegawaiModel jabatan);
 }

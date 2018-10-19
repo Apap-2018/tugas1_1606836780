@@ -28,6 +28,12 @@ public class JabatanPegawaiServiceImpl implements JabatanPegawaiService {
 	public List<JabatanPegawaiModel> getJabatanPegawaiById(Long id){
 		return jabatanPegawaiDb.findAllByJabatan_Id(id);
 	}
+
+	@Override
+	public void addJabatanPegawai(JabatanPegawaiModel jabatan) {
+		// TODO Auto-generated method stub
+		jabatanPegawaiDb.save(jabatan);
+	}
 	
 
 	

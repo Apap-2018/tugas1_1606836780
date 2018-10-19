@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th = "http://www.thymeleaf.org">
 	<head>
-		<title>Home</title>
-		<object th:include="fragments/fragment :: css" th:remove="tag"></object>
-		<object th:include="fragments/fragment :: js" th:remove="tag"></object>
-	</head>
-	<body>
-		<nav th:replace="fragments/fragment :: navbar"></nav>
+		<title th:replace="fragments/fragment :: headerFragment('Home')"></title>
 		
-		<div class="container-fluid">
-			<h2 style= text-align:center>Sistem Informasi Kepegawaian</h2>
-			<h5 style= text-align:center>Selamat datang di Sistem Informasi Kepegawaian</h5>
-			<br>
+		<object th:include = "fragments/fragment :: css" th:remove = "tag"></object>
+		<object th:include = "fragments/fragment :: js" th:remove = "tag"></object>
+	</head>
+	
+	<body>
+		<nav th:replace = "fragments/fragment :: navbar"></nav>
+		<div class = "container-fluid">	
+			<h1>Sistem Informasi Kepegawaian</h1>
+			<h4>Selamat datang di Sistem Informasi Kepegawaian</h4>
 			<hr>
 			<h4>Lihat Data Berdasarkan NIP</h4>
 			<div class = "row">
@@ -29,32 +29,44 @@
 					</div>
 				</div>
 			</div>
- 			<hr>
-			<h1>Lihat Detail Jabatan</h1>
-			<h4>Pilih Jabatan</h4>
-			<form th:action="@{/jabatan/view}" method="GET">
-				<select name="jabatanId">
-					<option th:each="jabatan : ${listJabatan}" 
-				          th:value="${jabatan.id}" 
-				          th:text="${jabatan.nama}"></option>
-				</select>
-				<button type="submit" class="btn btn-primary">Cari</button>
-			</form>
-			<div class = "card">
-				<div class = "card-header">
-						Lihat Pegawai Termuda dan Tertua
+			<br>
+			<div class = "row">
+				<div class = "col-md-6">
+					<div class = "card">
+						<div class = "card-header">
+							Lihat Detail Jabatan
+						</div>
+						<div class = "card-body">
+							<form th:action="@{/jabatan/view}" method = "GET">
+								<select name = "jabatanId">
+									<option th:each = "jabatan : ${listJabatan}"
+											th:value = "${jabatan.id}"
+											th:text = "${jabatan.nama}"></option>
+								</select><br><br>
+								<button type = "submit" class = "btn btn-primary">Submit</button>
+							</form>
+						</div>
+					</div><br><br>
+					<div class = "card">
+						<div class = "card-header">
+							Lihat Pegawai Termuda dan Tertua
+						</div>
+						<div class = "card-body">
+							<form th:action="@{/pegawai/termuda-tertua}" method = "GET">
+								<select name = "instansiId">
+									<option th:each = "instansi : ${listInstansi}"
+											th:value = "${instansi.id}"
+											th:text = "${instansi.nama}"></option>
+								</select><br><br>
+								<button type = "submit" class = "btn btn-primary">Submit</button>
+							</form>
+							
+						</div>
+					
+					</div>
 				</div>
-				<div class = "card-body">
-					<form th:action="@{/pegawai/termuda-tertua}" method = "GET">
-						<select name = "instansiId">
-							<option th:each = "instansi : ${listInstansi}"
-									th:value = "${instansi.id}"
-									th:text = "${instansi.nama}"></option>
-						</select><br><br>
-						<button type = "submit" class = "btn btn-primary">Submit</button>
-					</form>	
-				</div>	
+			</div>
+			
 		</div>
 	</body>
-	
 </html>

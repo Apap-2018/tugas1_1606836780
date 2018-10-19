@@ -7,15 +7,15 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "provinsi")
 public class ProvinsiModel {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Size(max = 10)
-	@NotNull
-	private int id;
+	private Long id;
 	
 	@NotNull
 	@Size(max = 255)
@@ -26,12 +26,17 @@ public class ProvinsiModel {
 	@Size(max = 255)
 	@Column(name = "presentase_tunjangan", nullable = false)
 	private Double presentase_tunjangan;
+	
+	@OneToMany(mappedBy="provinsi", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<InstansiModel> listInstansi;
 
-	public int getId() {
+
+
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -50,7 +55,16 @@ public class ProvinsiModel {
 	public void setPresentase_tunjangan(Double presentase_tunjangan) {
 		this.presentase_tunjangan = presentase_tunjangan;
 	}
-	
+
+	public List<InstansiModel> getListInstansi() {
+		return listInstansi;
+	}
+
+	public void setListInstansi(List<InstansiModel> listInstansi) {
+		this.listInstansi = listInstansi;
+	}
+
+
 	
 
 }

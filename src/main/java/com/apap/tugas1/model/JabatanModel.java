@@ -28,6 +28,9 @@ public class JabatanModel implements Serializable{
 	@NotNull
 	@Column(name = "gaji_pokok", nullable = false)
 	private double gaji_pokok;
+	
+	@OneToMany(mappedBy = "jabatan", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	private List<JabatanPegawaiModel> listJabatanPegawai;
 
 	public long getId() {
 		return id;
@@ -60,6 +63,15 @@ public class JabatanModel implements Serializable{
 	public void setGaji_pokok(double gaji_pokok) {
 		this.gaji_pokok = gaji_pokok;
 	}
+
+	public List<JabatanPegawaiModel> getListJabatanPegawai() {
+		return listJabatanPegawai;
+	}
+
+	public void setListJabatanPegawai(List<JabatanPegawaiModel> listJabatanPegawai) {
+		this.listJabatanPegawai = listJabatanPegawai;
+	}
+	
 	
 	
 	
