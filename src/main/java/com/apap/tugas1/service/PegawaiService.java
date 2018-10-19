@@ -11,5 +11,8 @@ public interface PegawaiService {
 	void addPegawai (PegawaiModel Pegawai);
 	
 	Optional<PegawaiModel> getPegawaiByNIP(Long NIP);
+	
+	PegawaiModel pegawaiTermuda(InstansiModel instansi);
+	PegawaiModel pegawaiTertua(InstansiModel instansi);
 
 }

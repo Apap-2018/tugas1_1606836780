@@ -39,7 +39,22 @@
 				          th:text="${jabatan.nama}"></option>
 				</select>
 				<button type="submit" class="btn btn-primary">Cari</button>
-			</form> 
+			</form>
+			<div class = "card">
+				<div class = "card-header">
+						Lihat Pegawai Termuda dan Tertua
+				</div>
+				<div class = "card-body">
+					<form th:action="@{/pegawai/termuda-tertua}" method = "GET">
+						<select name = "instansiId">
+							<option th:each = "instansi : ${listInstansi}"
+									th:value = "${instansi.id}"
+									th:text = "${instansi.nama}"></option>
+						</select><br><br>
+						<button type = "submit" class = "btn btn-primary">Submit</button>
+					</form>	
+				</div>	
 		</div>
 	</body>
+	
 </html>

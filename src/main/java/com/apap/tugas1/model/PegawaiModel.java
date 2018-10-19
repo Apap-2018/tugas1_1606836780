@@ -36,9 +36,10 @@ public class PegawaiModel implements Serializable{
 	@Column(name = "tempat_lahir", nullable = false)
 	private String tempat_lahir;
 	
+
 	@NotNull
 	@Column(name = "tanggal_lahir", nullable = false)
-	private Date tanggal_lahir;
+	private Date tanggalLahir;
 	
 	@NotNull
 	@Size(max = 255)
@@ -84,13 +85,6 @@ public class PegawaiModel implements Serializable{
 		this.tempat_lahir = tempat_lahir;
 	}
 
-	public Date getTanggal_lahir() {
-		return tanggal_lahir;
-	}
-
-	public void setTanggal_lahir(Date tanggal_lahir) {
-		this.tanggal_lahir = tanggal_lahir;
-	}
 
 	public String getTahun_masuk() {
 		return tahun_masuk;
@@ -106,6 +100,14 @@ public class PegawaiModel implements Serializable{
 
 	public void setInstansi(InstansiModel instansi) {
 		this.instansi = instansi;
+	}
+	
+	public Date getTanggalLahir() {
+		return tanggalLahir;
+	}
+
+	public void setTanggalLahir(Date tanggalLahir) {
+		this.tanggalLahir = tanggalLahir;
 	}
 	
 	
