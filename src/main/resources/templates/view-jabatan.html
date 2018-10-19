@@ -8,8 +8,8 @@
 	<body>
 		<nav th:replace="fragments/fragment :: navbar"></nav>
 		
-		<h1>Detail Jabatan</h1>
-		<table>
+		<h1 style=text-align:center>Detail Jabatan</h1>
+		<table align="center">
 			<tr>
 				<td>Nama</td>
 				<td th:text="${jabatan.nama}"></td>
@@ -28,13 +28,13 @@
 			</tr>
 		</table>
 		
-		<form th:action="@{'/jabatan/ubah'}" method="GET">
+		<form style=text-align:center th:action="@{'/jabatan/ubah'}" method="GET">
 			<input type="hidden" th:value="${jabatan.id}" name="jabatanId">
 			<button value="submit">Ubah</button>
 		</form>
 		
 		<hr>
-		<form th:action="@{'/jabatan/hapus'}" th:method="POST" >
+		<form style=text-align:center th:action="@{'/jabatan/hapus'}" th:method="POST" >
     		<input type="hidden" name="id" th:value="${jabatan.id}" />
     		<button value="submit" class="btn btn-danger">Hapus</button>
 		</form>
