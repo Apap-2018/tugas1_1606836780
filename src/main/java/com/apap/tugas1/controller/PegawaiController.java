@@ -2,6 +2,7 @@ package com.apap.tugas1.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -208,6 +209,57 @@ public class PegawaiController {
 		model.addAttribute("nipPegawai", nip);
 		return "notifications";
 
+	}
+	
+	@RequestMapping(path="/pegawai/cari", method = RequestMethod.GET)
+	private String cariPegawai(Optional<String> idProvinsi, Optional<String> idInstansi, Optional<String> idJabatan, Model model) {
+		List<ProvinsiModel> listProvinsi = provinsiService.getAllProvinsi();
+		List<JabatanModel> listJabatan = jabatanService.getAll();
+		model.addAttribute("listProvinsi",listProvinsi);
+		model.addAttribute("listJabatan", listJabatan);
+		
+		List<PegawaiModel> pegawai= null;
+		if(idProvinsi.isPresent()) {
+			ProvinsiModel provinsi = provinsiService.getProvinsiById(Long.parseLong(idProvinsi.get())).get();
+			if(idInstansi.isPresent()) {
+				InstansiModel instansi = instansiService.getIntansiById(Long.parseLong(idInstansi.get())).get();
+				if(idJabatan.isPresent()) {
+					JabatanModel jabatan = jabatanService.getJabatanById(Long.parseLong(idJabatan.get())).get();
+					pegawai = pegawaiService.findPegawaiByInstansiAndJabatan(instansi, jabatan);
+				}
+				else {
+					pegawai = instansi.getPegawaiInstansi();
+				}
+			} else {
+				List<InstansiModel> instansi = provinsi.getListInstansi();
+				pegawai = instansi.get(0).getPegawaiInstansi();
+				for(int x = 1;x < instansi.size();x++) {
+					List<PegawaiModel> pegProv = instansi.get(x).getPegawaiInstansi();
+					for(PegawaiModel peg:pegProv) {
+						pegawai.add(peg);
+					}
+				}
+				
+				if (idJabatan.isPresent()) {
+					JabatanModel jabatan = jabatanService.getJabatanById(Long.parseLong(idJabatan.get())).get();
+					pegawai = pegawaiService.findPegawaiByProvinsiAndJabatan(pegawai, jabatan);
+				}
+			}
+			
+		} else {
+			if(idJabatan.isPresent()) {
+				JabatanModel jabatan = jabatanService.getJabatanById(Long.parseLong(idJabatan.get())).get();
+				List<JabatanPegawaiModel> jabatanpeg = jabatan.getListJabatanPegawai();
+				List<PegawaiModel> pegawailist = new ArrayList<>();
+				for(JabatanPegawaiModel jabpeg: jabatanpeg) {
+					pegawailist.add(jabpeg.getPegawai());
+				}
+				pegawai = pegawailist;
+			}
+			
+		}
+		model.addAttribute("listPencarian", pegawai);
+		return "cari-pegawai";
 	}
 
 }

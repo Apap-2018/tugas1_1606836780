@@ -36,6 +36,10 @@ public class InstansiModel implements Serializable{
 	@OnDelete(action = OnDeleteAction.NO_ACTION)
 	@JsonIgnore
 	private ProvinsiModel provinsi;
+	
+	@OneToMany(mappedBy="instansi", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JsonIgnore
+	private List<PegawaiModel> pegawaiInstansi;
 
 	public long getId() {
 		return id;
@@ -67,6 +71,14 @@ public class InstansiModel implements Serializable{
 
 	public void setProvinsi(ProvinsiModel provinsi) {
 		this.provinsi = provinsi;
+	}
+
+	public List<PegawaiModel> getPegawaiInstansi() {
+		return pegawaiInstansi;
+	}
+
+	public void setPegawaiInstansi(List<PegawaiModel> pegawaiInstansi) {
+		this.pegawaiInstansi = pegawaiInstansi;
 	}
 	
 	

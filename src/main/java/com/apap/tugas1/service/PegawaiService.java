@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.apap.tugas1.model.InstansiModel;
+import com.apap.tugas1.model.JabatanModel;
 import com.apap.tugas1.model.PegawaiModel;
 
 public interface PegawaiService {
@@ -17,6 +18,8 @@ public interface PegawaiService {
 	String makeNip(PegawaiModel pegawai);
 	void addPegawaiBaru(PegawaiModel pegawai);
 	List<PegawaiModel> getPegawaiByInstansi(InstansiModel Instansi);
-	void update(PegawaiModel updatePegawai, PegawaiModel pegawaiSebelumUpdate); 
+	void update(PegawaiModel updatePegawai, PegawaiModel pegawaiSebelumUpdate);
+	List<PegawaiModel> findPegawaiByInstansiAndJabatan(InstansiModel instansi, JabatanModel jabatan);
+	List<PegawaiModel> findPegawaiByProvinsiAndJabatan(List<PegawaiModel> pegawaiProvinsi, JabatanModel jabatan);
 
 }
