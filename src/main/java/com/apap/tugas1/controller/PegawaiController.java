@@ -155,5 +155,59 @@ public class PegawaiController {
 		ProvinsiModel provinsi = provinsiService.getDetailProvinsiById(idProvinsi);
 	    return provinsi.getListInstansi();
 	}
+	
+	@RequestMapping(value="/pegawai/ubah", method = RequestMethod.GET)
+	private String updatePegawai(@RequestParam(name = "nip")String nip, Model model) {
+		PegawaiModel pegawai = pegawaiService.getPegawaiByNIP(Long.parseLong(nip)).get();
+		List<ProvinsiModel> listProvinsi = provinsiService.getAllProvinsi();
+		
+		List<InstansiModel> listInstansi = pegawai.getInstansi().getProvinsi().getListInstansi();
+		
+		List<JabatanModel> listJabatan = jabatanService.getAll();
+		
+		model.addAttribute("title", "Ubah Pegawai");
+		model.addAttribute("listProvinsi", listProvinsi);
+		model.addAttribute("listInstansi", listInstansi);
+		model.addAttribute("listJabatan", listJabatan);
+		model.addAttribute("pegawai", pegawai);
+		return "update-pegawai";
+		
+	}
+	
+	@RequestMapping(value = "/pegawai/ubah", method = RequestMethod.POST, params= {"addJabatan"})
+	public String rowJabatan(@ModelAttribute PegawaiModel pegawai_new, Model model) {
+		PegawaiModel pegawai = pegawai_new;
+		
+		JabatanPegawaiModel jabatanPegawai = new JabatanPegawaiModel();
+		jabatanPegawai.setPegawai(pegawai);
+		pegawai.getListJabatanPegawai().add(jabatanPegawai);
+		
+		List<ProvinsiModel> listProvinsi = provinsiService.getAllProvinsi();
+		
+		List<InstansiModel> listInstansi = new ArrayList<InstansiModel>();
+		listInstansi = listProvinsi.get(0).getListInstansi();
+		
+		List<JabatanModel> listJabatan = jabatanService.getAll();
+		
+		model.addAttribute("title", "Ubah Pegawai");
+		model.addAttribute("listProvinsi", listProvinsi);
+		model.addAttribute("listInstansi", listInstansi);
+		model.addAttribute("listJabatan", listJabatan);
+		model.addAttribute("pegawai", pegawai);
+		return "update-pegawai";
+	}
+	
+	@RequestMapping(value="/pegawai/ubah", method=RequestMethod.POST)
+	private String updatePegawaiSubmit(@ModelAttribute PegawaiModel pegawai, Model model) {
+		PegawaiModel pegawaiSebelumUpdate = pegawaiService.getPegawaiByNIP(Long.parseLong(pegawai.getNip())).get();
+		String nip = pegawaiService.makeNip(pegawai);
+		pegawai.setNip(nip);
+		pegawaiService.update(pegawai, pegawaiSebelumUpdate);
+		model.addAttribute("pegawai", pegawai);
+		model.addAttribute("title", "Sukses");
+		model.addAttribute("nipPegawai", nip);
+		return "notifications";
+
+	}
 
 }

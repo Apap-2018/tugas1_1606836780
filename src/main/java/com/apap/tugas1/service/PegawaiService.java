@@ -17,5 +17,6 @@ public interface PegawaiService {
 	String makeNip(PegawaiModel pegawai);
 	void addPegawaiBaru(PegawaiModel pegawai);
 	List<PegawaiModel> getPegawaiByInstansi(InstansiModel Instansi);
+	void update(PegawaiModel updatePegawai, PegawaiModel pegawaiSebelumUpdate); 
 
 }

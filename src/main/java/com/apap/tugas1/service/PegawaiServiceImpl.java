@@ -20,6 +20,9 @@ public class PegawaiServiceImpl implements PegawaiService {
 	@Autowired
 	private PegawaiDb PegawaiDb;
 	
+	@Autowired
+	private JabatanPegawaiDb jabatanPegawaiDb;
+	
 	@Override
 	public void addPegawai(PegawaiModel Pegawai) {
 		// TODO Auto-generated method stub
@@ -89,6 +92,30 @@ public class PegawaiServiceImpl implements PegawaiService {
 	public void addPegawaiBaru(PegawaiModel pegawai) {
 		// TODO Auto-generated method stub
 		PegawaiDb.save(pegawai);
+		
+	}
+
+	@Override
+	public void update(PegawaiModel updatePegawai, PegawaiModel pegawaiSebelumUpdate) {
+		// TODO Auto-generated method stub
+		pegawaiSebelumUpdate.setInstansi(updatePegawai.getInstansi());
+		pegawaiSebelumUpdate.setNama(updatePegawai.getNama());
+		pegawaiSebelumUpdate.setNip(updatePegawai.getNip());
+		pegawaiSebelumUpdate.setTahunMasuk(updatePegawai.getTahunMasuk());
+		pegawaiSebelumUpdate.setTanggalLahir(updatePegawai.getTanggalLahir());
+		pegawaiSebelumUpdate.setTempat_lahir(updatePegawai.getTempat_lahir());
+		
+		
+		//update jabatan
+		int jumlahList = pegawaiSebelumUpdate.getListJabatanPegawai().size();
+		for(int i = 0; i<jumlahList; i++ ) {
+			pegawaiSebelumUpdate.getListJabatanPegawai().get(i).setJabatan(updatePegawai.getListJabatanPegawai().get(i).getJabatan());
+		}
+		
+		for (int i = jumlahList; i < updatePegawai.getListJabatanPegawai().size(); i++) {
+			updatePegawai.getListJabatanPegawai().get(i).setPegawai(pegawaiSebelumUpdate);
+			jabatanPegawaiDb.save(updatePegawai.getListJabatanPegawai().get(i));
+		}
 		
 	}
 
